@@ -1,4 +1,14 @@
-def InMatrix
+def InMatrix():
+    x = int(input())
+    a = []
+    for i in range(x):
+        a.append([0]*x)
+    for i in range(x):
+        for j in range(x):
+            a[i][j] = 1
+    return a
+
+
 def OutMatrix(a):
     for i in range(len(a)):
         for j in range(len(a[i])):
@@ -8,7 +18,9 @@ def OutMatrix(a):
     return 0
 
 
-a = [[3, 4, 9, 4, 6], [8, 5, 6, 6, 2], [6, 4, 5, 4, 4], [5, 3, 7, 6, 8], [4, 4, 2, 7, 4]]
+# a = [[3, 4, 9, 4, 6], [8, 5, 6, 6, 2], [6, 4, 5, 4, 4], [5, 3, 7, 6, 8], [4, 4, 2, 7, 4]]
+
+a = InMatrix()
 OutMatrix(a)
 
 """
