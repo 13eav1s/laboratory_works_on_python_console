@@ -1,48 +1,74 @@
-def InMatrix():
-    x = int(input())
-    a = []
-    for i in range(x):
-        a.append([0]*x)
-    for i in range(x):
-        for j in range(x):
-            a[i][j] = 1
-    return a
-
-
-def OutMatrix(a):
-    for i in range(len(a)):
-        for j in range(len(a[i])):
-            print(a[i][j], end=" ")
-        print()
-    print()
-    return 0
-
-
-# a = [[3, 4, 9, 4, 6], [8, 5, 6, 6, 2], [6, 4, 5, 4, 4], [5, 3, 7, 6, 8], [4, 4, 2, 7, 4]]
-
-a = InMatrix()
-OutMatrix(a)
-
 """
-for i in range(len(a)):
-    for j in range(len(a[i])):
-        print(a[i][j], end=" ")
-    print()
+Написать программу, которая по целочисленным координатам 3-х вершин определяет
+стороны треугольника, их длину, высоту, проведенную из наибольшего угла.
+Определить, является ли треугольник правильным.
+Далее вводятся координаты точки, проверить, лижит ли эта точка внутри
+треугольника, если да, то найти расстояние от точки до минимальной стороны или
+ее продолжения.
 """
 
-"""Change a elements main diagonal to 0"""
+# Подключение библиотеки для работы с математическими функциями
+import math as m
 
-"""
-for i in range(len(a)):
-    a[i][i] = 0
-OutMatrix(a)
-"""
+# Ввод координат точек
+xa, ya = map(int, input("Введите координаты точки А в строчку: ").split())
+xb, yb = map(int, input("Введите координаты точки B в строчку: ").split())
+xc, yc = map(int, input("Введите координаты точки C в строчку: ").split())
+# Нахождение длинн сторон
+ab = m.sqrt((xb - xa) ** 2 + (yb - ya) ** 2)
+bc = m.sqrt((xc - xb) ** 2 + (yc - yb) ** 2)
+ac = m.sqrt((xc - xa) ** 2 + (yc - ya) ** 2)
 
-"""Change elements under main diagonal on 123..."""
-
-e = 1
-for i in range(len(a)):
-    for j in range(i):
-        a[i][j] = e
-        e += 1
-OutMatrix(a)
+# Проверка на возможность треугольника
+if ab + bc > ac and ac + bc > ab and ac + ab > bc:
+    # Вывод сторон треугольника
+    print("Сторона AB = ", ab, "Сторона BC = ", bc, "Сторона AC = ", ac)
+    # Расчет полупериметра треугольника
+    p = (ab + bc + ac) / 2
+    # Расчет площади треугольника
+    s = m.sqrt(p * (p - ab) * (p - bc) * (p - ac))
+    # Расчет высоты опущенной из вершины большего угла
+    h = (2 * s) / max(ab, bc, ac)
+    # Вывод высоты опущенной из вершины наибольшего угла
+    print("Высота опущенная из вершина наибольшего угла = ", h)
+    # Проверка треугольника на правильность
+    if ab == bc == ac:
+        print("Введенный треугольник является правильным")
+    else:
+        print("Введенный треугольник не является правильным")
+    # Ввод новой точки пользователем
+    xd, yd = map(int, input("Введите координаты точки D в строчку: ").split())
+    # Нахождение длин отрезков ad, bd, cd
+    ad = m.sqrt((xd - xa) ** 2 + (yd - ya) ** 2)
+    bd = m.sqrt((xd - xb) ** 2 + (yd - yb) ** 2)
+    cd = m.sqrt((xd - xc) ** 2 + (yd - yc) ** 2)
+    # нахождение полупериметров трех треугольников
+    pabd = (ab + bd + ad) / 2
+    pbcd = (bd + bc + cd) / 2
+    pacd = (ac + ad + cd) / 2
+    # Нахождение площадей треугольников, которые образует точка D со сторонами
+    # AB BC AC
+    sabd = m.sqrt(pabd * (pabd - ab) * (pabd - bd) * (pabd - ad))
+    sbcd = m.sqrt(pbcd * (pbcd - bc) * (pbcd - bd) * (pbcd - cd))
+    sacd = m.sqrt(pacd * (pacd - ad) * (pacd - ab) * (pacd - bd))
+    # Введем e погрешности
+    e = 10 ** (-5)
+    # Проверка лежит ли точка D внутри треугольника
+    distance = None
+    if (sabd + sacd + sbcd) - e <= s <= (sabd + sacd + sbcd) + e:
+        print("Точка D лежит внутри треугольника")
+        if min(ab, bc, ac) == ab:
+            distance = (abs((yb - ya) * xd - (xb - xa) * yd + xb * ya - yb *
+                            ya)) / m.sqrt((yb - ya) ** 2 + (xb - xa) ** 2)
+        elif min(ab, bc, ac) == bc:
+            distance = (abs((yc - yb) * xd - (xc - xb) * yd + xc * yb - yc *
+                            yb)) / m.sqrt((yc - yb) ** 2 + (xc - xb) ** 2)
+        elif min(ab, bc, ac) == ac:
+            distance = (abs((yc - ya) * xd - (xc - xa) * yd + xc * ya - yc *
+                            ya)) / m.sqrt((yc - ya) ** 2 + (xc - xa) ** 2)
+    else:
+        print("Точка D не лежит внутри треугольника")
+    if distance is not None:
+        print("Расстояние от точки до наименьшей прямой = ", distance)
+else:
+    print("Такой треугольник не сущестыует")
