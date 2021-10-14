@@ -34,4 +34,5 @@ while abs(amount - amount2) >= e and n <= count:
               .format(n, (2 * n - 1)/(m.sqrt(2)**n), amount))
         print('-' * 49)
     n += 1
-print("Сумма последовательности = ", amount)
+print("Сумма последовательности = ", amount,
+      "Вычислена за {}, итераций.".format(n))
