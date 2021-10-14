@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9e1a0a2-4215-4008-bd95-d4b8f09d45a0" name="Changes" comment="Change a elements under main diagonal to 1234...">
+    <list default="true" id="a9e1a0a2-4215-4008-bd95-d4b8f09d45a0" name="Changes" comment="Change sized matrix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +80,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631214207517</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Change sized matrix">
+      <created>1631219452349</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1631219452349</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +105,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="nothing" />
     <MESSAGE value="Change a elements under main diagonal to 1234..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Change a elements under main diagonal to 1234..." />
+    <MESSAGE value="Change sized matrix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change sized matrix" />
   </component>
 </project>
