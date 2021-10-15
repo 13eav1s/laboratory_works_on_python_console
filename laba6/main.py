@@ -158,7 +158,7 @@ def Action4(ArrayFunc):
                                    "Индекс - это целое число!")
         if index < len(ArrayFunc):
             break
-    ArrayFunc.remove(index)
+    ArrayFunc.pop(index)
     print("Список на настоящий момент: \n", ArrayFunc)
     return ArrayFunc
 
