@@ -42,18 +42,28 @@ def Check_Input_Is_Number(value1, value2):
     while True:
         point = 0
         minus = 0
+        exp = 0
         number = input(value1)
         e = 0
         for i in range(len(number)):
             if ord("0") <= ord(number[i]) <= ord("9") or \
-                    (number[i] == "." and i == 1 and point == 0) or \
-                    (number[i] == "-" and i == 0) or \
-                    (number[i] == "." and i == 2 and
-                     number[0] == "-" and point == 0) or \
-                    (number[i] == "." and i == 1 and number[0] == "0") or \
-                    (number[i] == "." and i == 2 and number[0] == "-" and
-                     number[1] == "0") or (number[i] == "."):
+                    (number[i] == "." and i == 1 and point == 0
+                     and exp == 0) \
+                    or (number[i] == "-" and i == 0) \
+                    or (number[i] == "." and i == 2 and number[0] == "-"
+                        and point == 0 and exp == 0) \
+                    or (number[i] == "." and i == 1 and number[0] == "0"
+                        and exp == 0) \
+                    or (number[i] == "." and i == 2 and number[0] == "-"
+                        and number[1] == "0") \
+                    or (number[i] == "." and exp == 0) \
+                    or (number[i] == "e" and 0 < i
+                        and number[i-1] != "-") \
+                    or (i > 1 and number[i] == "-"
+                        and number[i - 1] == "e"):
                 e = 1
+                if number[i] == "e":
+                    exp += 1
                 if number[i] == ".":
                     point += 1
                 if number[i] == "-":
@@ -64,6 +74,10 @@ def Check_Input_Is_Number(value1, value2):
             if minus > 1 or point > 1:
                 e = 0
                 break
+            if exp > 1:
+                e = 0
+                break
+
         if e == 1:
             break
         print(value2)
