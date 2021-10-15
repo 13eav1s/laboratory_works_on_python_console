@@ -198,5 +198,5 @@ while True:
     if action == 0:
         break
     if action > 5:
-        print("Пункты еще не реализованы!")
+        print("Пункты пока еще не реализованы!")
         action = PrintMenu()
