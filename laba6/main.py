@@ -45,12 +45,12 @@ def Check_Input_Is_Number(value1, value2):
         number = input(value1)
         e = 0
         for i in range(len(number)):
-            if ord("0") <= ord(number[i]) <= ord("9") or\
-                    (number[i] == "." and i == 1 and point == 0) or\
-                    (number[i] == "-" and i == 0) or\
+            if ord("0") <= ord(number[i]) <= ord("9") or \
+                    (number[i] == "." and i == 1 and point == 0) or \
+                    (number[i] == "-" and i == 0) or \
                     (number[i] == "." and i == 2 and
-                     number[0] == "-" and point == 0) or\
-                    (number[i] == "." and i == 1 and number[0] == "0") or\
+                     number[0] == "-" and point == 0) or \
+                    (number[i] == "." and i == 1 and number[0] == "0") or \
                     (number[i] == "." and i == 2 and number[0] == "-" and
                      number[1] == "0") or (number[i] == "."):
                 e = 1
@@ -113,7 +113,7 @@ def Action1(ArrayFunc):
     N = Check_Input_Is_Int("Введите колличество элементов массива: ",
                            "Введите целое число")
     for i in range(N):
-        ArrayFunc.append((2 * i - 1)/(m.sqrt(2)**i))
+        ArrayFunc.append((2 * i - 1) / (m.sqrt(2) ** i))
     print("Ряд был проинициализарован сейчас он выглядит так: \n",
           ArrayFunc)
     return ArrayFunc
@@ -172,9 +172,28 @@ def Action5(ArrayFunc):
 
 def Action6(ArrayFunc):
     print("Вы выбрали пункт: найти K-ый экстремиум")
-    while True:
-        K = Check_Input_Is_Int("Введите номер экстремиума: ",
-                               "Номер - это целое число!")
+    K = Check_Input_Is_Int("Введите номер экстремиума: ",
+                           "Номер - это целое число!")
+    e = 0
+    index = None
+    extreme = None
+    for i in range(len(ArrayFunc)):
+        if 0 < i < len(ArrayFunc) - 1:
+            if ArrayFunc[i-1] < ArrayFunc[i] > ArrayFunc[i + 1]:
+                e += 1
+                index = i
+            if ArrayFunc[i-1] > ArrayFunc[i] < ArrayFunc[i + 1]:
+                e += 1
+                index = i
+            if e == K:
+                extreme = ArrayFunc[index]
+                break
+    if extreme is None:
+        print("Экстремиумов в списке меньше чем вы думаете! ")
+        return ArrayFunc
+    else:
+        print(K, "-ый экстремиум = ", extreme)
+        return ArrayFunc
 
 
 array = []
@@ -195,8 +214,11 @@ while True:
     if action == 5:
         array = Action5(array)
         action = PrintMenu()
+    if action == 6:
+        array = Action6(array)
+        action = PrintMenu()
     if action == 0:
         break
-    if action > 5:
+    if action > 6:
         print("Пункты пока еще не реализованы!")
         action = PrintMenu()
