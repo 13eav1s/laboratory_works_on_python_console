@@ -197,3 +197,6 @@ while True:
         action = PrintMenu()
     if action == 0:
         break
+    if action > 5:
+        print("Пункты еще не реализованы!")
+        action = PrintMenu()
