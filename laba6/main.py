@@ -32,19 +32,110 @@
 принцип работы и назначение созданных функций.
 """
 
-print("Меню : \n"
-      "1. Проинициализировать список первыми N элементами заданного в "
-      "л/р 5 ряда \n"
-      "2. Очистить список и ввести его с клавиатуры \n"
-      "3. Добавить элемент в произвольное место списка \n"
-      "4. Удалить произвольный элемент из списка (по номеру) \n"
-      "5. Очистить список \n"
-      "6. Найти значение K-го экстремума в списке \n"
-      "7. Найти наиболее длинную последовательность по варианту")
-while True:
-    menu = int(input("Введите номер пункта из меню: "))
-    if 1 <= menu <= 7:
-        break
-    else:
-        print("Вы ввели несуществующий пункт!")
+import math as m
 
+
+# Функция проверяет введенное значение на то что оно является
+# целочисленным, и если это так, то возваращает его
+
+def Check_Input_Is_Number(value1, value2):
+    point = 0
+    minus = 0
+    while True:
+        number = input(value1)
+        e = 0
+        for i in range(len(number)):
+            if ord("0") <= ord(number[i]) <= ord("9") or\
+                    (number[i] == "." and i == 1 and point == 0) or\
+                    (number[i] == "-" and i == 0) or\
+                    (number[i] == "." and i == 2 and
+                     number[0] == "-" and point == 0) or\
+                    (number[i] == "." and i == 1 and number[0] == "0") or\
+                    (number[i] == "." and i == 2 and number[0] == "-" and
+                     number[1] == "0"):
+                e = 1
+                if number[i] == ".":
+                    point += 1
+                if number[i] == "-":
+                    minus += 1
+            else:
+                e = 0
+                break
+            if minus > 1 or point > 1:
+                e = 0
+                break
+        if e == 1:
+            break
+        print(value2)
+    return float(number)
+
+
+def Check_Input_Is_Int(value1, value2):
+    while True:
+        menu = input(value1)
+        e = 0
+        for i in range(len(menu)):
+            if ord("0") <= ord(menu[i]) <= ord("9"):
+                e = 1
+            else:
+                e = 0
+                break
+        if e == 1:
+            break
+        print(value2)
+    return int(menu)
+
+
+def PrintMenu():
+    print("Меню : \n"
+          "1. Проинициализировать список первыми N элементами заданного"
+          "в л/р 5 ряда \n"
+          "2. Очистить список и ввести его с клавиатуры \n"
+          "3. Добавить элемент в произвольное место списка \n"
+          "4. Удалить произвольный элемент из списка (по номеру) \n"
+          "5. Очистить список \n"
+          "6. Найти значение K-го экстремума в списке \n"
+          "7. Найти наиболее длинную последовательность по варианту")
+    value1 = "Введите номер пункта меню (целое число от 1 до 7) :"
+    value2 = "Вы ввели несуществующий пункт. Пункт меню - целое число!"
+    while True:
+        menu = Check_Input_Is_Int(value1, value2)
+        if 1 <= menu <= 7:
+            break
+    return menu
+
+
+# Функция из меню пункт 1
+def Action1(ArrayFunc):
+    print("Вы выбрали Проинициализировать список первыми N элементами "
+          "заданного в л/р 5 ряда")
+    N = Check_Input_Is_Int("Введите колличество элементов массива: ",
+                           "Введите целое число")
+    for i in range(N):
+        ArrayFunc.append((2 * i - 1)/(m.sqrt(2)**i))
+    print("Ряд был проинициализарован сейчас он выглядит так: \n",
+          ArrayFunc)
+    return ArrayFunc
+
+
+# Функция из меню пункт 2
+def Action2(ArrayFunc):
+    print("Вы выбрали очистить список и ввести его с клавиатуры")
+    ArrayFunc.clear()
+    N = Check_Input_Is_Int("Введите колличество элементов массива: ",
+                           "Введите целое число")
+    for i in range(N):
+        ArrayFunc.append(Check_Input_Is_Number("Введите элемент массива",
+                                               "Программа работаеат с "
+                                               "чиловыми массивами!"))
+    print("Ряд был введен сейчас он выглядит так: \n",
+          ArrayFunc)
+    return ArrayFunc
+
+
+array = []
+action = PrintMenu()
+if action == 1:
+    array = Action1(array)
+if action == 2:
+    array = Action2(array)
