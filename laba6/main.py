@@ -39,9 +39,9 @@ import math as m
 # целочисленным, и если это так, то возваращает его
 
 def Check_Input_Is_Number(value1, value2):
-    point = 0
-    minus = 0
     while True:
+        point = 0
+        minus = 0
         number = input(value1)
         e = 0
         for i in range(len(number)):
@@ -52,7 +52,7 @@ def Check_Input_Is_Number(value1, value2):
                      number[0] == "-" and point == 0) or\
                     (number[i] == "." and i == 1 and number[0] == "0") or\
                     (number[i] == "." and i == 2 and number[0] == "-" and
-                     number[1] == "0"):
+                     number[1] == "0") or (number[i] == "."):
                 e = 1
                 if number[i] == ".":
                     point += 1
@@ -95,12 +95,13 @@ def PrintMenu():
           "4. Удалить произвольный элемент из списка (по номеру) \n"
           "5. Очистить список \n"
           "6. Найти значение K-го экстремума в списке \n"
-          "7. Найти наиболее длинную последовательность по варианту")
+          "7. Найти наиболее длинную последовательность по варианту \n"
+          "0. Выйти из программы \n")
     value1 = "Введите номер пункта меню (целое число от 1 до 7) :"
     value2 = "Вы ввели несуществующий пункт. Пункт меню - целое число!"
     while True:
         menu = Check_Input_Is_Int(value1, value2)
-        if 1 <= menu <= 7:
+        if 0 <= menu <= 7:
             break
     return menu
 
@@ -133,9 +134,66 @@ def Action2(ArrayFunc):
     return ArrayFunc
 
 
+def Action3(ArrayFunc):
+    if len(ArrayFunc) == 0:
+        print("Список пуст, добавьте в него элементы!")
+        return ArrayFunc
+    N = Check_Input_Is_Number("Введите элемент, который хотите добавить:"
+                              " ", "Элемент должен быть числом!")
+    while True:
+        index = Check_Input_Is_Int("Введите индекс элемента, который "
+                                   "хотите поменять: ", "Индекс - это "
+                                                        "целое число!")
+        if len(ArrayFunc) > index:
+            break
+    ArrayFunc.insert(index, N)
+    print("Так выглядит список сейчас: ", ArrayFunc)
+    return ArrayFunc
+
+
+def Action4(ArrayFunc):
+    print("Вы выбрали пункт: удалить произвольный элемент")
+    while True:
+        index = Check_Input_Is_Int("Введите индекс элемента: ",
+                                   "Индекс - это целое число!")
+        if index < len(ArrayFunc):
+            break
+    ArrayFunc.remove(index)
+    print("Список на настоящий момент: \n", ArrayFunc)
+    return ArrayFunc
+
+
+def Action5(ArrayFunc):
+    print("Вы выбрали пункт: очистить список! ")
+    ArrayFunc.clear()
+    print("Теперь список пуст!")
+    return ArrayFunc
+
+
+def Action6(ArrayFunc):
+    print("Вы выбрали пункт: найти K-ый экстремиум")
+    while True:
+        K = Check_Input_Is_Int("Введите номер экстремиума: ",
+                               "Номер - это целое число!")
+
+
 array = []
 action = PrintMenu()
-if action == 1:
-    array = Action1(array)
-if action == 2:
-    array = Action2(array)
+while True:
+    if action == 1:
+        array = Action1(array)
+        action = PrintMenu()
+    if action == 2:
+        array = Action2(array)
+        action = PrintMenu()
+    if action == 3:
+        array = Action3(array)
+        action = PrintMenu()
+    if action == 4:
+        array = Action4(array)
+        action = PrintMenu()
+    if action == 5:
+        array = Action5(array)
+        action = PrintMenu()
+    if action == 0:
+        break
