@@ -35,8 +35,8 @@ def ClearArray(arr):
 def Fill(arr):
     number = int(input("Введите колличество элементов списка"))
     for i in range(number):
-        arr.append(float(input("Введите элемент, который хотите"
-                               " добавить: ")))
+        arr.append(input("Введите элемент, который хотите"
+                         " добавить: "))
     return arr
 
 
@@ -55,7 +55,7 @@ def AddElem(arr):
             break
         else:
             print("Вы ввели индекс слишком большой индекс")
-    elem = float(input("Введите элемент: "))
+    elem = input("Введите элемент: ")
     arr.append(0)
     temp_elem = arr[index]
     arr[index] = elem
@@ -77,9 +77,45 @@ def RemoveElem(arr):
     return arr2
 
 
+def FiElVBiSi(arr):
+    MaximeIndex = len(arr)
+    MaxElem = 0
+    LastMax = 0
+    for i in range(len(arr)):
+        for j in range(len(arr[i])):
+            if ord("A") <= ord(arr[i][j]) <= ord("Z"):
+                MaxElem += 1
+        if MaxElem >= LastMax:
+            LastMax = MaxElem
+            MaximeIndex = i
+        MaxElem = 0
+    if MaximeIndex < len(arr):
+        print("Элемент с наибольшем колличеством заглавных букв: \n",
+              arr[MaximeIndex])
+    return arr
+
+
+def BigToSmall(a):
+    shift = abs(ord('a') - ord('A'))
+    a = chr(ord(a) + shift)
+    return a
+
+
+def RenameAllBigLetter(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr[i])):
+            if 'A' <= arr[i][j] <= 'Z':
+                arr[i][j] = BigToSmall(arr[i][j])
+    print("Список выглядит так: \n", arr)
+    return arr
+
+
 mass = []
 item = PrintMenu()
 while True:
+    if item == 0:
+        print("Программа завершила работу")
+        break
     if item == 1:
         ClearAndFill(mass)
         item = PrintMenu()
@@ -88,4 +124,13 @@ while True:
         item = PrintMenu()
     if item == 3:
         RemoveElem(mass)
+        item = PrintMenu()
+    if item == 4:
+        ClearArray(mass)
+        item = PrintMenu()
+    if item == 5:
+        FiElVBiSi(mass)
+        item = PrintMenu()
+    if item == 6:
+        RenameAllBigLetter(mass)
         item = PrintMenu()
