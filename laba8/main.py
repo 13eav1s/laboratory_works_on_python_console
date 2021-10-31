@@ -106,6 +106,6 @@ while True:
     if item == 4:
         AddColumn(mass)
         item = PrintMenu()
-    if item == 9:
+    if item == 10:
         OutMatrix(mass)
         item = PrintMenu()
