@@ -23,7 +23,7 @@ def PrintMenu():
           "3. Удалить строку \n"
           "4. Добавить столбец \n"
           "5. Удалить столбец \n"
-          "6. Найти строку, имеющую определённое свойство по варианту \n"
+          "6. Найти строку наибольшее количество подряд идущих одинаковых элементов \n"
           "7. Переставить местами строки с наибольшим и наименьшим количеством отрицательных элементов \n"
           "8. Найти столбец, имеющий определённое свойство по варианту \n"
           "9. Переставить местами столбцы с максимальной и минимальной суммойэлеметов \n"
@@ -31,7 +31,7 @@ def PrintMenu():
           "0. Выйти из программы \n")
     while True:
         elem = int(input("Введите номер пункта: "))
-        if 0 <= elem <= 7:
+        if 0 <= elem <= 10:
             break
     return elem
 
@@ -49,7 +49,6 @@ def OutMatrix(a):
             print(a[i][j], end=" ")
         print()
     print()
-    return 0
 
 
 def ClearAndFill(matrix):
@@ -57,7 +56,7 @@ def ClearAndFill(matrix):
     matrix_column = int(input("Введите колличество столбцов: "))
     matrix_string = int(input("Введите колличество строчек: "))
     for i in range(matrix_string):
-        matrix.append([0]*matrix_column)
+        matrix.append([0] * matrix_column)
     for i in range(matrix_string):
         for j in range(matrix_column):
             matrix[i][j] = int(input("Введите элемент, который хотите добавить: "))
@@ -66,7 +65,7 @@ def ClearAndFill(matrix):
 
 
 def AddString(matrix):
-    matrix.append([0]*len(matrix[0]))
+    matrix.append([0] * len(matrix[0]))
     for i in range(len(matrix[0])):
         matrix[len(matrix) - 1][i] = int(input("Введите элемент который хотите добавить: "))
     OutMatrix(matrix)
@@ -96,6 +95,44 @@ def AddColumn(matrix):
     return matrix
 
 
+def FindCommonString(matrix):
+    num = 0
+    numlast = 0
+    maxindex = 0
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i]) - 1):
+            if matrix[i][j] == matrix[i][j + 1]:
+                num += 1
+                if num > numlast:
+                    numlast = num
+                    maxindex = i
+            else:
+                num = 0
+    print("Строчка с максимальным колличеством подряд идущих символов: \n", matrix[maxindex])
+
+
+def ReplaceStrings(matrix):
+    lastmax = 0
+    lastmin = 0
+    minindex = 0
+    maxindex = 0
+    for i in range(len(matrix)):
+        elem = 0
+        for j in range(len(matrix[i])):
+            if int(matrix[i][j]) < 0:
+                elem += 1
+                if lastmax < elem:
+                    lastmax = elem
+                    maxindex = i
+                if lastmin > elem:
+                    lastmin = elem
+                    minindex = i
+    save_string = matrix[maxindex]
+    matrix[maxindex] = matrix[minindex]
+    matrix[minindex] = save_string
+    OutMatrix(matrix)
+
+
 mass = []
 item = PrintMenu()
 while True:
@@ -116,6 +153,12 @@ while True:
         item = PrintMenu()
     if item == 5:
         DelColumn(mass)
+        item = PrintMenu()
+    if item == 6:
+        FindCommonString(mass)
+        item = PrintMenu()
+    if item == 7:
+        ReplaceStrings(mass)
         item = PrintMenu()
     if item == 10:
         OutMatrix(mass)
