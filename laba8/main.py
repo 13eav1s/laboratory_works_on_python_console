@@ -80,6 +80,14 @@ def DelString(matrix):
     return matrix
 
 
+def DelColumn(matrix):
+    index = int(input("Введите номер колонки, которую хотите удалить: "))
+    for i in range(len(matrix)):
+        matrix[i].pop(index)
+    OutMatrix(matrix)
+    return matrix
+
+
 def AddColumn(matrix):
     print("Вы выбрали добавить столбец ")
     for i in range(len(matrix)):
@@ -105,6 +113,9 @@ while True:
         item = PrintMenu()
     if item == 4:
         AddColumn(mass)
+        item = PrintMenu()
+    if item == 5:
+        DelColumn(mass)
         item = PrintMenu()
     if item == 10:
         OutMatrix(mass)
