@@ -70,12 +70,22 @@ def AddString(matrix):
     for i in range(len(matrix[0])):
         matrix[len(matrix) - 1][i] = int(input("Введите элемент который хотите добавить: "))
     OutMatrix(matrix)
+    return matrix
 
 
 def DelString(matrix):
     index = int(input("Введите номер строки, которую хотите удалить: "))
     matrix.pop(index)
     OutMatrix(matrix)
+    return matrix
+
+
+def AddColumn(matrix):
+    print("Вы выбрали добавить столбец ")
+    for i in range(len(matrix)):
+        matrix[i] += str(int(input("Введите элемент, который хотите добавить: ")))
+    OutMatrix(matrix)
+    return matrix
 
 
 mass = []
@@ -93,6 +103,9 @@ while True:
     if item == 3:
         DelString(mass)
         item = PrintMenu()
-    if item == 10:
+    if item == 4:
+        AddColumn(mass)
+        item = PrintMenu()
+    if item == 9:
         OutMatrix(mass)
         item = PrintMenu()
