@@ -25,8 +25,8 @@ def PrintMenu():
           "5. Удалить столбец \n"
           "6. Найти строку наибольшее количество подряд идущих одинаковых элементов \n"
           "7. Переставить местами строки с наибольшим и наименьшим количеством отрицательных элементов \n"
-          "8. Найти столбец, имеющий определённое свойство по варианту \n"
-          "9. Переставить местами столбцы с максимальной и минимальной суммойэлеметов \n"
+          "8. Найти столбец, имеющий наибольшее колличество четных элементов \n"
+          "9. Переставить местами столбцы с максимальной и минимальной суммой элеметов \n"
           "10. Вывести текущую матрицу \n"
           "0. Выйти из программы \n")
     while True:
@@ -65,15 +65,24 @@ def ClearAndFill(matrix):
 
 
 def AddString(matrix):
-    matrix.append([0] * len(matrix[0]))
+    index = int(input("Введите номер строки, которую хотите добавить: "))
+    if index >= len(matrix):
+        print("Матрица меньше, чем вы думаете")
+        return 0
+    # matrix.append([0] * len(matrix[0]))
+    newString = []
     for i in range(len(matrix[0])):
-        matrix[len(matrix) - 1][i] = int(input("Введите элемент который хотите добавить: "))
+        newString.append(int(input("Введите элемент, который хотите добавить: ")))
+    matrix.insert(index, newString)
     OutMatrix(matrix)
     return matrix
 
 
 def DelString(matrix):
     index = int(input("Введите номер строки, которую хотите удалить: "))
+    if index >= len(matrix):
+        print("Нет такой строки ")
+        return 0
     matrix.pop(index)
     OutMatrix(matrix)
     return matrix
@@ -89,8 +98,12 @@ def DelColumn(matrix):
 
 def AddColumn(matrix):
     print("Вы выбрали добавить столбец ")
+    index = int(input("Введите номер столбца который хотите добавить: "))
+    if index >= len(matrix[0]):
+        print("Матрица меньше чем вы думаете")
+        return 0
     for i in range(len(matrix)):
-        matrix[i] += str(int(input("Введите элемент, который хотите добавить: ")))
+        matrix[i].insert(index, int(input("Введите элемент, который хотите добавить: ")))
     OutMatrix(matrix)
     return matrix
 
@@ -133,6 +146,41 @@ def ReplaceStrings(matrix):
     OutMatrix(matrix)
 
 
+def ReplaceColums(matrix):
+    maxsum = -100500
+    minsum = 100500
+    minindex = 0
+    maxindex = 0
+    for i in range(len(matrix)):
+        tempSum = 0
+        for j in range(len(matrix[0])):
+            tempSum += matrix[j][i]
+        if tempSum > maxsum:
+            maxsum = tempSum
+            minindex = j
+        if tempSum < minsum:
+            minsum = tempSum
+            maxindex = j
+    print("maxindex =",  maxindex, "minindex =", minindex)
+
+
+def findColumn(matrix):
+    maxcol = 0
+    index = 0
+    for i in range(len(matrix)):
+        col = 0
+        for j in range(len(matrix[0])):
+            if matrix[i][j] % 2 == 0:
+                col += 1
+                if col > maxcol:
+                    maxcol = col
+                    index = j
+    print("Столбец с наибольшим колличеством четных элементов имеет индекс: ", index)
+    for i in range(len(matrix)):
+        print(matrix[i][index])
+    return matrix
+
+
 mass = []
 item = PrintMenu()
 while True:
@@ -159,6 +207,12 @@ while True:
         item = PrintMenu()
     if item == 7:
         ReplaceStrings(mass)
+        item = PrintMenu()
+    if item == 8:
+        findColumn(mass)
+        item = PrintMenu()
+    if item == 9:
+        ReplaceColums(mass)
         item = PrintMenu()
     if item == 10:
         OutMatrix(mass)
