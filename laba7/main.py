@@ -10,7 +10,12 @@
 6.Изменение элемента по варианту
 """
 
+"""
+Произвольный список, вывести слово с наибольшем колличеством заглавных английских букв
+"""
 
+
+# Функция выводит на экран меню и принимает ввод номера пункта
 def PrintMenu():
     print("Меню: \n"
           "1. Очистить список и ввести его с клавиатуры \n"
@@ -19,7 +24,8 @@ def PrintMenu():
           "4. Очистить список \n"
           "5. Поиск элемента с наибольшим числом английских заглавных"
           " букв \n"
-          "6. Замена всех английских заглавных букв на строчные \n")
+          "6. Замена всех английских заглавных букв на строчные \n"
+          "0. Выйти из программы")
     while True:
         elem = int(input("Введите номер пункта: "))
         if 0 <= elem <= 7:
@@ -27,26 +33,32 @@ def PrintMenu():
     return elem
 
 
+# Функция очищает список
 def ClearArray(arr):
     arr.clear()
     return arr
 
 
+# Функция для заполнения списка элементами
 def Fill(arr):
-    number = int(input("Введите колличество элементов списка"))
+    number = int(input("Введите колличество элементов списка: "))
     for i in range(number):
         arr.append(input("Введите элемент, который хотите"
                          " добавить: "))
     return arr
 
 
+# Функция состоит из двух функций - очистки списка и записи в
+# него новых элементов
 def ClearAndFill(arr):
+    print("Вы выбрали очистить список и ввести новые элементы: \n")
     arr = ClearArray(arr)
     arr = Fill(arr)
     print("Список выглядит так: \n", arr)
     return arr
 
 
+# Функция является заменой методу insert
 def AddElem(arr):
     while True:
         index = int(input("Введите индекс под которым вы хотите записать"
@@ -65,6 +77,7 @@ def AddElem(arr):
     print("Ваш список выглядит так: \n", arr)
 
 
+# Функция для удаления элемента по индексу
 def RemoveElem(arr):
     print("Вы выбрали удалить произвольный элемент из списка")
     index = int(input("Введите индекс элемента, который хотите "
@@ -77,6 +90,8 @@ def RemoveElem(arr):
     return arr2
 
 
+# Функция для нахождения элемента с наибольшим
+# колличеством заглавных букв
 def FiElVBiSi(arr):
     MaximeIndex = len(arr)
     MaxElem = 0
@@ -95,21 +110,31 @@ def FiElVBiSi(arr):
     return arr
 
 
+# Функция принимает в себя заглавный символ латинского алфавита,
+# а возращает маленький
 def BigToSmall(a):
     shift = abs(ord('a') - ord('A'))
     a = chr(ord(a) + shift)
     return a
 
 
+# Функция заменяет все большие буквы в списке на строчные
 def RenameAllBigLetter(arr):
+    elem = ""
+    newarr = []
     for i in range(len(arr)):
         for j in range(len(arr[i])):
             if 'A' <= arr[i][j] <= 'Z':
-                arr[i][j] = BigToSmall(arr[i][j])
-    print("Список выглядит так: \n", arr)
-    return arr
+                elem += BigToSmall(arr[i][j])
+            else:
+                elem += str(arr[i][j])
+        newarr.append(elem)
+        elem = ""
+    print("Список выглядит так: \n", newarr)
+    return newarr
 
 
+# Точка входа в программу
 mass = []
 item = PrintMenu()
 while True:

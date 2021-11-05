@@ -5,13 +5,7 @@
       <option name="ignoredErrors">
         <list>
           <option value="N802" />
-<<<<<<< HEAD
-          <option value="N803" />
           <option value="N806" />
-          <option value="N801" />
-=======
-          <option value="N806" />
->>>>>>> origin/master
         </list>
       </option>
     </inspection_tool>
