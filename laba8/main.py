@@ -161,9 +161,9 @@ def ReplaceColums(matrix):
     minsum = 100500
     minindex = 0
     maxindex = 0
-    for i in range(len(matrix)):
+    for i in range(len(matrix[0])):
         tempSum = 0
-        for j in range(len(matrix[0])):
+        for j in range(len(matrix)):
             tempSum += matrix[j][i]
         if tempSum > maxsum:
             maxsum = tempSum
@@ -185,9 +185,9 @@ def ReplaceColums(matrix):
 def findColumn(matrix):
     maxcol = 0
     index = 0
-    for i in range(len(matrix)):
+    for i in range(len(matrix[0])):
         col = 0
-        for j in range(len(matrix[0])):
+        for j in range(len(matrix)):
             if matrix[j][i] % 2 == 0:
                 col += 1
                 if col > maxcol:
