@@ -13,10 +13,12 @@
 9. Переставить местами столбцы с максимальной и минимальной суммой
 элементов
 10. Вывести текущую матрицу
+
+Краснов Леонид ИУ7-11Б
 """
 
 
-def PrintMenu():
+def PrintMenu():    # Функция печатает меню
     print("Меню: \n"
           "1. Ввести матрицу \n"
           "2. Добавить строку \n"
@@ -36,49 +38,69 @@ def PrintMenu():
     return elem
 
 
-def ClearArray(matrix):
+def ClearArray(matrix):  # Очищает матрицу
     matrix.clear()
     print("Матрица очищена")
     return matrix
 
 
-def OutMatrix(a):
+def OutMatrix(a):   # Выводит матрицу на консоль
     print("Матрица выглядит так: ")
     for i in range(len(a)):
         for j in range(len(a[i])):
-            print(a[i][j], end=" ")
+            print("{:9g}".format(a[i][j]), end=" ")
         print()
     print()
 
 
-def ClearAndFill(matrix):
-    ClearArray(matrix)
+def Fill(matrix):
     matrix_column = int(input("Введите колличество столбцов: "))
     matrix_string = int(input("Введите колличество строчек: "))
+    # for i in range(matrix_string):
+    #     matrix.append([0] * matrix_column)
     for i in range(matrix_string):
-        matrix.append([0] * matrix_column)
-    for i in range(matrix_string):
-        for j in range(matrix_column):
-            matrix[i][j] = int(input("Введите элемент, который хотите добавить: "))
+        while True:
+            D = list(map(float, input(f"Введите {i} строку: ").split()))
+            if len(D) != matrix_column:
+                print("Вы ввели неверное число элементов, введите строку заного ")
+            else:
+                matrix.append(D)
+                break
     OutMatrix(matrix)
     return matrix
 
 
-def AddString(matrix):
+def ClearAndFill(matrix):   # Очищает и принемает ввод в матрицу новых элементов
+    ClearArray(matrix)
+    Fill(matrix)
+
+
+def AddString(matrix):  # Добавляет строку
     index = int(input("Введите номер строки, которую хотите добавить: "))
     if index > len(matrix):
         print("Матрица меньше, чем вы думаете")
         return 0
     if index == len(matrix):
-        matrix.append([0] * len(matrix[0]))
+        # matrix.append([0] * len(matrix[0]))
+        while True:
+            D = list(map(float, input(f"Введите строку: ").split()))
+            if len(D) != len(matrix[0]):
+                print("Вы ввели неверное число элементов, введите строку заного ")
+            else:
+                matrix.append(D)
+                break
         for i in range(len(matrix[0])):
             matrix[len(matrix) - 1][i] = int(input("Введите элемент, который хотите добавить: "))
         OutMatrix(matrix)
         return matrix
     newString = []
-    for i in range(len(matrix[0])):
-        newString.append(int(input("Введите элемент, который хотите добавить: ")))
-    matrix.insert(index, newString)
+    while True:
+        D = list(map(float, input(f"Введите строку: ").split()))
+        if len(D) != len(matrix[0]):
+            print("Вы ввели неверное число элементов, введите строку заного ")
+        else:
+            matrix.insert(index, D)
+            break
     OutMatrix(matrix)
     return matrix
 
