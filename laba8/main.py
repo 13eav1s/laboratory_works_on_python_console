@@ -81,7 +81,6 @@ def AddString(matrix):  # Добавляет строку
         print("Матрица меньше, чем вы думаете")
         return 0
     if index == len(matrix):
-        # matrix.append([0] * len(matrix[0]))
         while True:
             D = list(map(float, input(f"Введите строку: ").split()))
             if len(D) != len(matrix[0]):
@@ -93,7 +92,6 @@ def AddString(matrix):  # Добавляет строку
             matrix[len(matrix) - 1][i] = int(input("Введите элемент, который хотите добавить: "))
         OutMatrix(matrix)
         return matrix
-    newString = []
     while True:
         D = list(map(float, input(f"Введите строку: ").split()))
         if len(D) != len(matrix[0]):
