@@ -35,29 +35,29 @@ for i in range(size):
 
 # Поворот матрицы на 90 градусов по часовой стрелке
 # Матрица, куда будет записан 1-я повернутая на 90
-matrixFlip = []
+# matrixFlip = []
 
 # заполнение новой матрицы нулями
-for i in range(size):
-    matrixFlip.append([0] * size)
-
-for i in range(size):
-    for j in range(size):
-        matrixFlip[i][j] = matrix[size - j - 1][i]
+# for i in range(size):
+#     matrixFlip.append([0] * size)
+#
+# for i in range(size):
+#     for j in range(size):
+#         matrixFlip[i][j] = matrix[size - j - 1][i]
 
 # Вывод матрицы на экран
 print("Перевернутая по часовой матрица:")
 for i in range(size):
     for j in range(size):
-        print("{:8d}".format(matrixFlip[i][j]), end=" ")
+        print("{:8d}".format(matrix[size - j - 1][i]), end=" ")
     print()
 
 # Поворот начальной матрицы против часовой на 90 градусов против часовой
 matrixBackFlip = []
 
 # заполнение новой матрицы нулями
-for i in range(size):
-    matrixBackFlip.append([0] * size)
+# for i in range(size):
+#     matrixBackFlip.append([0] * size)
 
 # 00 01 02
 # 10 11 12
@@ -68,13 +68,13 @@ for i in range(size):
 # 00 10 20
 
 # Запись перевернутой матрицы
-for i in range(size):
-    for j in range(size):
-        matrixBackFlip[i][j] = matrix[j][size - i - 1]
+# for i in range(size):
+#     for j in range(size):
+#         matrixBackFlip[i][j] = matrix[j][size - i - 1]
 
 # Вывод матрицы на экран
 print("Перевернутая против часовой матрица:")
 for i in range(size):
     for j in range(size):
-        print("{:8d}".format(matrixBackFlip[i][j]), end=" ")
+        print("{:8d}".format(matrix[j][size - i - 1]), end=" ")
     print()
