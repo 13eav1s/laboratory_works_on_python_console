@@ -37,16 +37,29 @@ lowElems = []
 
 # Цикл для нахождения элементов над и под главной диагональю и
 # записи их в соответствующие массивы
+
+maxi = matrix[0][1]
+mini = matrix[len(matrix) - 1][len(matrix) - 1]
+
 for i in range(size):
     for j in range(size):
         if i < j:
-            upElems.append(matrix[i][j])
-        elif i > j:
-            lowElems.append(matrix[i][j])
+            if matrix[i][j] > maxi:
+                maxi = matrix[i][j]
+            # upElems.append(matrix[i][j])
+        if i + j >= size:
+            if matrix[i][j] < mini:
+                mini = matrix[i][j]
+            # lowElems.append(matrix[i][j])
 
 # Проверка правильности работы программы
 # print("upElems =", upElems)
 # print("lowElems = ", lowElems)
 
-print("Максимальный элемент над главной диагональю =", max(upElems))
-print("Минимальный элемент под главной диагональю =", min(lowElems))
+# if len(upElems) > 0:
+#     print("Максимальный элемент над главной диагональю =", max(upElems))
+# if len(lowElems) > 0:
+#     print("Минимальный элемент под побочной диагональю =", min(lowElems))
+
+print("Максимальный элемент над главной диагональю =", maxi)
+print("Минимальный элемент под побочной диагональю =", mini)
