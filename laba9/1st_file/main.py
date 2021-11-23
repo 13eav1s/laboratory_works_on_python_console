@@ -36,16 +36,24 @@ for i in range(len(a)):
     else:
         average /= plusElem
     # print("Среднеарифметическое", i, "строки = ", average)
+    if average == 0:
+        average = "No"
     AV.append(average)
     lowElem = 0
     for j in range(len(a[i])):
-        if a[i][j] < average:
-            lowElem += 1
+        if average != "No":
+            if a[i][j] < average:
+                lowElem += 1
     L.append(lowElem)
     average = 0
 
+# Вывод матрицы на экран
 for i in range(len(a)):
     for j in range(len(a[i])):
-        print(a[i][j], end=" ")
-    print("     ", AV[i], L[i], end=" ")
-    print()
+        print("{:<8.2}".format(a[i][j]), end=" ")
+    print("     {:<8.2}".format(AV[i]), L[i])
+
+# for i in range(len(a)):
+#     for j in range(len(a[i])):
+#         print(a[i][j], end=" ")
+#     print("     ", AV[i], L[i])
