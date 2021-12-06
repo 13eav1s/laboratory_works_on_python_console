@@ -7,7 +7,7 @@ import math as m
 
 
 def F(x):
-    y = m.cos(x)
+    y = x**3
     return y
 
 
