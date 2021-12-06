@@ -230,6 +230,6 @@ while True:
         textOut(renameWord(text))
         item = PrintMenu()
     if item == 6:
-        textOut(math(text))
+        textOut(arif(text))
         item = PrintMenu()
 print(text)
