@@ -164,10 +164,10 @@ def findSentence(txt):
 
         colWords = 0
         for j in range(len(sentence)):
-            for e in range(len(alphabet)):
-                colCommon.append(sentence[j].count(alphabet[e]))
+            for e in range(0, len(alphabet), 2):
+                colCommon.append(int(sentence[j].count(alphabet[e])) + int(sentence[j].count(alphabet[e + 1])))
                 if max(colCommon) >= 2:
-                    #  print(i, colCommon, sentence[j])
+                    print(i, colCommon, sentence[j])
                     colWords += 1
                     colCommon = []
                     break
@@ -234,7 +234,7 @@ text = ["Вот как же так. С конца 1811-го года 5+45 нач
         " друг, против друга такое бесчисленное количество злодеяний, обманов, измен,",
         " воровства, подделок и выпуска фальшивых ассигнаций, грабежей, поджогов",
         " и убийств, которого в целые века не соберет летопись всех судов мира и на которые,",
-        " в этот период времени, люди, совершавшие их, не смотрели как на преступления. как. кук."]
+        " в этот период времени, люди, совершавшие их, не смотрели как на преступления. как."]
 t = text.copy()
 
 
