@@ -167,7 +167,7 @@ def findSentence(txt):
             for e in range(0, len(alphabet), 2):
                 colCommon.append(int(sentence[j].count(alphabet[e])) + int(sentence[j].count(alphabet[e + 1])))
                 if max(colCommon) >= 2:
-                    print(i, colCommon, sentence[j])
+                    #  print(i, colCommon, sentence[j])
                     colWords += 1
                     colCommon = []
                     break
@@ -295,38 +295,66 @@ def off_width(txt):
 #         text[i][j].split()
 # print(text)
 # textOut(text)
-''''''
 
 #  точка входа в программу
 
 item = PrintMenu()
+lastItem = 1
 while True:
     if item == 0:
         print("Программа завершила работу")
         break
     if item == 1:
+        text = t.copy()
         textOut(left(text))
+        lastItem = item
         item = PrintMenu()
     if item == 2:
+        text = t.copy()
         textOut(right(text))
+        lastItem = item
         item = PrintMenu()
     if item == 3:
+        text = t.copy()
         textOut(width_alig(text))
+        lastItem = item
         item = PrintMenu()
     if item == 4:
-        textOut(delWord(text))
+        text = t.copy()
+        texx = delWord(text)
+        t = texx.copy()
+        if lastItem == 1:
+            texx = left(texx).copy()
+        elif lastItem == 2:
+            texx = right(texx).copy()
+        elif lastItem == 3:
+            texx = width_alig(texx).copy()
+        textOut(texx)
         item = PrintMenu()
     if item == 5:
-        textOut(renameWord(text))
+        text = t.copy()
+        texx = renameWord(text)
+        t = texx.copy()
+        if lastItem == 1:
+            texx = left(texx).copy()
+        elif lastItem == 2:
+            texx = right(texx).copy()
+        elif lastItem == 3:
+            texx = width_alig(texx).copy()
+        textOut(texx)
         item = PrintMenu()
     if item == 6:
-        textOut(arif(text))
+        t.copy()
+        texx = arif(text)
+        textOut(texx)
         item = PrintMenu()
+        t = texx.copy()
     if item == 7:
+        text = t.copy()
         findSentence(text)
         item = PrintMenu()
     if item == 8:
         text = t.copy()
         print("Отключены все выравнивания")
         item = PrintMenu()
-print(text)
+#  print(text)
