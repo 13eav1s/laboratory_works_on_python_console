@@ -16,6 +16,11 @@
 из 5-7 предложений. Текст следует разбить по строкам так, чтобы ни одна строка не
 совпадала с предложением, то есть никакая строка, кроме последней, не должна
 оканчиваться точкой.
+
+Краснов Леонид ИУ7-11Б
+"""
+"""
+Найти предложение с самым большим колличеством слов
 """
 
 
@@ -88,7 +93,15 @@ def textOut(txt):
 def delWord(txt):
     word = input("Введите слово, которое хотите удолить: ")
     for i in range(len(txt)):
-        txt[i] = txt[i].replace(word, '')
+        txt[i] = txt[i].replace(" " + word + " ", ' ')
+        txt[i] = txt[i].replace("," + word + " ", ' ')
+        txt[i] = txt[i].replace("." + word + " ", ' ')
+        txt[i] = txt[i].replace("-" + word + " ", ' ')
+        txt[i] = txt[i].replace(" " + word + ",", ' ')
+        txt[i] = txt[i].replace(" " + word + ".", ' ')
+        txt[i] = txt[i].replace(" " + word + "-", ' ')
+        txt[i] = txt[i].replace(" " + word + ":", ' ')
+        txt[i] = txt[i].replace(" " + word + ";", ' ')
     return txt
 
 
