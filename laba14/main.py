@@ -16,8 +16,6 @@ import time
 
 
 #  Функция для создания таблицы
-
-
 def printTab(t1, t2, t3, t4, t5, t6, t7, t8, t9):
     tabsize = 69
     # построение таблицы
@@ -30,21 +28,6 @@ def printTab(t1, t2, t3, t4, t5, t6, t7, t8, t9):
     print('_' * tabsize)
     print("| Упорядоченный в обратном порядке |{:10.5g}|{:10.5g}|{:10.5g}|".format(t7, t8, t9))
     print('_' * tabsize)
-
-
-#  Сортировка расческой из инета
-# def sort(mass):
-#     alen = len(mass)
-#     gap = (alen * 10 // 13) if alen > 1 else 0
-#     while gap:
-#         if 8 < gap < 11:  # variant "comb-11"
-#             gap = 11
-#         swapped = False
-#         for i in range(alen - gap):
-#             if mass[i + gap] < mass[i]:
-#                 mass[i], mass[i + gap] = mass[i + gap], mass[i]
-#                 swapped = True
-#         gap = (gap * 10 // 13) or swapped
 
 
 #  Сортировка расчесткой
@@ -145,6 +128,7 @@ else:
             except:
                 print("Вы ввели не целое число")
 
+#  Расчет времени
 time4 = hairbrush(userMass1)
 time5 = hairbrush(userMass2)
 time6 = hairbrush(userMass3)
@@ -158,7 +142,5 @@ time7 = hairbrush(userMass1)
 time8 = hairbrush(userMass2)
 time9 = hairbrush(userMass3)
 
+#  Вывод таблицы
 printTab(time1, time2, time3, time4, time5, time6, time7, time8, time9)
-#  print(hairbrush(userMass1))
-#  print(timeit.timeit(hairbrush(userMass)))
-#  printTab(1.314, 1234.432, 14.234, 1234, 123, 3, 354, 2.4, 23.34)
