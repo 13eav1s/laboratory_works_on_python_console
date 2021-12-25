@@ -58,7 +58,7 @@ def PrintMenu():
 # Функция выбора файла
 def file_choice(file_name):
     try:
-        f = open(file_name)
+        f = open(file_name, "a")
     except FileNotFoundError:
         print("\nТакого файла нет")
         return ""
@@ -227,6 +227,7 @@ while True:
     elif item == 1:
         file = input("\nВыберите файл для работы: ")
         file = file_choice(file)
+        database = file
         item = PrintMenu()
     elif item == 2:
         database = database_init(file)
