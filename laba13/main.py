@@ -27,33 +27,7 @@ import os
 import struct
 
 
-# def db_check(file):
-#     #  Проверка открываемой базы данных
-#     if file not in os.listdir():
-#         return False
-#     return False
-#     f = open(file, 'rb')
-#     format_ = f.readline().strip()
-#     return format_.decode()  #.replace('100s', '').replace('l', '').replace('d', '') != ''
-
-
-def input_pole_type():
-# Ввод типов полей
-    print('Типы полей:')
-    print('1: Текстовое (размер поля - 50 символов)')
-    print('2: Целочисленное (в диапазоне от [−2 147 483 647, +2 147 483 647])')
-    print('3: Вещественное (числа с плавающей точкой)')
-    pole_type = int(input('Введите тип поля: '))
-    while pole_type not in (1, 2, 3):
-        pole_type = int(input('Ошибка! Введите тип поля:'))
-    if pole_type == 1:
-        return '100s'
-    elif pole_type == 2:
-        return 'l'
-    else:
-        return 'd'
-
-
+# Проверка на соответствие введенных значений полям
 def input_pole_value(type_):
     #  Ввод значений полей
     if type_ == 1:
@@ -72,46 +46,23 @@ def input_pole_value(type_):
     return inp
 
 
-def input_string(text):
-    #  Ввод не пустой строки
-    inp = input(text)
-    while len(inp.replace(' ', '')) == 0:
-        inp = input('Ошибка! Длина строки нулевая. ' + text)
-    return inp.replace(';', '\;')
-
-
+#  Функция ввода натурального числа
 def input_natural_int(text):
-    '''Функция ввода натурального числа'''
     inp = input(text)
     while (not inp.isdigit()) or int(inp) < 1:
         inp = input('Ошибка! Повторите попытку. ' + text)
     return int(inp)
 
 
+#  Функция вывода строки-сообщения
 def print_message_string(string=''):
-    '''Функция вывода строки-сообщения'''
     l = len(string)
     was = '─' * ((92 - l) // 2)
     print(was + string + '─' * (92 - len(was) - l))
 
 
-def text_blue(text):
-    '''Перекрасить текст в голубой'''
-    return '\033[36m' + text + '\033[37m'
-
-
-def text_red(text):
-    '''Перекрасить текст в красный'''
-    return '\033[31m' + text + '\033[37m'
-
-
-def text_green(text):
-    '''Перекрасить текст в зеленый'''
-    return '\033[32m' + text + '\033[37m'
-
-
+#  Реализация команды help
 def nav_command_help(options, params, flags):
-    '''Реализация команды help'''
     print('Список доступных команд: ')
     print('help')
     print('list')
@@ -121,35 +72,23 @@ def nav_command_help(options, params, flags):
     print('Для получения справки по команде введите [название команды] --help')
 
 
+#  Реализация команды exit
 def nav_command_exit(options, params, flags):
-    '''Реализация команды exit'''
     if 'help' in flags:
         print('Введите команду exit для выхода из программы')
         return
     exit()
 
 
+#  Реализация команды list
 def nav_command_list(options, params, flags):
-    #  Реализация команды list
-    if 'help' in flags:
-        print('Вывод содержимого текущей директории')
-        print(text_green('Зеленым цветом отображаются директории'))
-        print(text_blue('Голубым цветом отображаются файлы'))
-        print(text_red('Красным цветом отображаются файлы баз данных'))
-        return
     for i in sorted(os.listdir('.'), key=lambda x: (osp.isdir(osp.join('.', x)), ord(x[0]) in range(1040, 1104)),
                     reverse=True):
-        if osp.isdir(osp.join('.', i)):
-            print(text_green(i))
-        else:
-            if i.endswith('.bin'):
-                print(text_red(i))
-            else:
-                print(text_blue(i))
+        print(i)
 
 
+#  Реализация команды cd
 def nav_command_cd(options, params, flags):
-    '''Реализация команды cd'''
     if 'help' in flags:
         print('Навигация по каталогам. Работает аналогично команде cd из командной строки windows')
         return
@@ -160,11 +99,13 @@ def nav_command_cd(options, params, flags):
     if '"' in options[0]:
         p = p[1:-1]
 
-    for i in '+=[]:;«,./? \*<>|':
+    #  Проверка на недопустимые символы в названии каталога
+    for i in "+=[]:;«,./? \*<>|":
         if i in p:
             print('Ошибка в имени файла или каталога')
             return
 
+    #  Проверка на существование каталога
     if not osp.isdir(osp.join('.', p)):
         print(f'Ошибка! Каталога "{p}" не существует')
         return
@@ -172,13 +113,14 @@ def nav_command_cd(options, params, flags):
     os.chdir(p)
 
 
+#  Реализация команды setdb
 def nav_command_setdb(options, params, flags):
-    '''Реализация команды setdb'''
     if 'help' in flags:
         print('Выбирает файл базы данных для работы')
         print('Использование: dbset [название_файла]')
         print('Если в названии файла есть пробелы запишите его название так: "название файла"')
         return
+    #  Проверка на ввод названия файла
     if len(options) == 0:
         print('Ошибка! Укажите файл')
         return
@@ -186,6 +128,7 @@ def nav_command_setdb(options, params, flags):
     if '"' in f:
         f = f[1:-1]
 
+    # Проверка на недопустимые символы в названии
     for i in '+=[]:;«,/? \*<>|':
         if i in f:
             print('Ошибка в имени файла')
@@ -193,13 +136,13 @@ def nav_command_setdb(options, params, flags):
     return f
 
 
+#  Реализация сообщения о существовании команды
 def nav_command_exception(options, params, flags):
-    '''Реализация команды-исключение'''
     print(f'Error! command "{params["COMMAND_NAME"]}" not found!')
 
 
+#  Парсер команд в меню навигации
 def nav_parse_command(command):
-    '''Парсер команд в меню навигации'''
     data = command.split()
     cmd = data[0]
     options = []
@@ -229,8 +172,8 @@ def nav_parse_command(command):
     return cmd, options, params, flags
 
 
+#  Вывод меню в меню редактирования бд
 def edit_command_print_menu():
-    #  Вывод меню в меню редактирования бд
     print('1. Инициализировать базу данных')
     print('2. Вывести содержимое базы данных')
     print('3. Добавить запись в базу данных')
@@ -251,35 +194,41 @@ def parse_db_format(format_):
     return list(res)
 
 
+#  Вывод бд
 def edit_command_print_db(file, format_, pole_titles):
     if file not in os.listdir():
         print(f'Ошибка! База данных {file} не инициализирована!')
         return
-    f = open(file, 'rb')
-    format_parsed = parse_db_format(format_)
-    print(' ', end='')
-    tmp = ('(Текстовый)', '(Целочисленный)', '(Вещественный)')
-    for i in range(len(pole_titles)):
-        print((pole_titles[i] + ' ' + tmp[format_parsed[i] - 1]).center(40), end='')
-    print()
-    BlockSize = struct.calcsize(format_)
-    l = f.read(BlockSize)
-    number = 1
-    while l != b'':
-        print(number, end='')
-        data = struct.unpack(format_, l.strip())
-        for i in range(len(data)):
-            if format_parsed[i] == 1:
-                elem = data[i].decode().strip('\x00')
-                print(elem.center(40), end='')
-            else:
-                print(str(data[i]).center(40), end='')
+    if os.path.getsize(file):
+        f = open(file, 'rb')
+        format_parsed = parse_db_format(format_)
+        print(' ', end='')
+        tmp = ('(Текстовый)', '(Целочисленный)', '(Вещественный)')
+        for i in range(len(pole_titles)):
+            print((pole_titles[i] + ' ' + tmp[format_parsed[i] - 1]).center(40), end='')
         print()
-        number += 1
+        BlockSize = struct.calcsize(format_)
         l = f.read(BlockSize)
-    f.close()
+        number = 1
+        while l != b'':
+            print(number, end='')
+            data = struct.unpack(format_, l.strip())
+            for i in range(len(data)):
+                if format_parsed[i] == 1:
+                    elem = data[i].decode().strip('\x00')
+                    print(elem.center(40), end='')
+                else:
+                    print(str(data[i]).center(40), end='')
+            print()
+            number += 1
+            l = f.read(BlockSize)
+        f.close()
+    else:
+        print("Файл пуст!")
+        return
 
 
+#  Добавление записи
 def edit_command_addline(file, format_, pole_titles):
     if file not in os.listdir():
         print(f'Ошибка! База данных {file} не инициализирована!')
@@ -294,6 +243,7 @@ def edit_command_addline(file, format_, pole_titles):
     f.close()
 
 
+#  Удаление записи
 def edit_command_remline(file, format_, pole_titles):
     if file not in os.listdir():
         print(f'Ошибка! База данных {file} не инициализирована!')
@@ -320,6 +270,7 @@ def edit_command_remline(file, format_, pole_titles):
     f.close()
 
 
+#  Проверка ввода
 def input_pole_type_index(text, possible_strings):
     inp = input(text)
     while len(inp) == 0 or inp not in possible_strings:
@@ -327,6 +278,7 @@ def input_pole_type_index(text, possible_strings):
     return possible_strings.index(inp)
 
 
+#  Поиск по одному полю
 def edit_command_find_1(file, format_, pole_titles):
     if file not in os.listdir():
         print(f'Ошибка! База данных {file} не инициализирована!')
@@ -370,6 +322,7 @@ def edit_command_find_1(file, format_, pole_titles):
     f.close()
 
 
+#  Поиск по двум полям
 def edit_command_find_2(file, format_, pole_titles):
     if file not in os.listdir():
         print(f'Ошибка! База данных {file} не инициализирована!')
@@ -417,15 +370,16 @@ def edit_command_find_2(file, format_, pole_titles):
     f.close()
 
 
+#  Выход в консоль
 def edit_command_exit_to_nav(*args):
     pass
 
 
+#  Выход из программы
 def edit_command_exit(*args):
     exit(0)
 
-
-
+#  Cписок функций
 EDIT_COMMANDS = [
     edit_command_init_db,
     edit_command_print_db,
@@ -437,6 +391,7 @@ EDIT_COMMANDS = [
     edit_command_exit
 ]
 
+# Cловарь
 NAV_COMMANDS = {
     'help': nav_command_help,
     'list': nav_command_list,
@@ -449,6 +404,8 @@ edit_mode = False
 FILE = None
 
 format_ = '100s100sld'
+
+#  Названия полей в бд
 pole_titles = ['Страна-изобретатель', 'Название технологии', 'Номер заказа', 'Награда за кражу']
 
 while True:
@@ -474,13 +431,6 @@ while True:
             res = NAV_COMMANDS['dbset'](options, params, flags)
             if res is None:
                 continue
-            FILE = res  # + '.bin'
-            # if db_check(FILE):
-            #     print('Внимание! В выбранной бд обнаружены ошибки. Желаете инициализировать ее?')
-            #     if input_string('Y/N: ') == 'Y':
-            #         edit_command_init_db(FILE)
-            #     else:
-            #         FILE = None
-            #         continue
+            FILE = res
             edit_mode = True
         NAV_COMMANDS.get(cmd, nav_command_exception)(options, params, flags)

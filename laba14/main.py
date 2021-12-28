@@ -13,6 +13,7 @@
 """
 
 import time
+import random
 
 
 #  Функция для создания таблицы
@@ -92,12 +93,7 @@ else:
         except:
             print("Вы ввели невозможный размер!")
     for i in range(sizeMass1):
-        while True:
-            try:
-                userMass1.append(int(input("Введите элемент массива: ")))
-                break
-            except:
-                print("Вы ввели не целое число")
+        userMass1.append(random.random())
 
     while True:
         try:
@@ -110,12 +106,7 @@ else:
             print("Вы ввели невозможный размер!")
 
     for i in range(sizeMass2):
-        while True:
-            try:
-                userMass2.append(int(input("Введите элемент массива: ")))
-                break
-            except:
-                print("Вы ввели не целое число")
+        userMass2.append(random.random())
 
     while True:
         try:
@@ -127,12 +118,7 @@ else:
         except:
             print("Вы ввели невозможный размер!")
     for i in range(sizeMass3):
-        while True:
-            try:
-                userMass3.append(int(input("Введите элемент массива: ")))
-                break
-            except:
-                print("Вы ввели не целое число")
+        userMass3.append(random.random())
 
 #  Расчет времени
 time4 = hairbrush(userMass1)
