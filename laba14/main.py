@@ -13,7 +13,10 @@
 """
 
 import time
+<<<<<<< HEAD
 import random
+=======
+>>>>>>> 6717550b6ec7c29b22511e7745c6a4bf4d6b69bb
 
 
 #  Функция для создания таблицы
@@ -35,9 +38,12 @@ def printTab(t1, t2, t3, t4, t5, t6, t7, t8, t9):
 def hairbrush(mass):
     start_time = time.perf_counter()
     massLen = len(mass)
+<<<<<<< HEAD
     if massLen <= 1:
         print(mass)
         return time.perf_counter() - start_time
+=======
+>>>>>>> 6717550b6ec7c29b22511e7745c6a4bf4d6b69bb
     redFac = 1.247
     gap = massLen - 1
     gapPose = gap
@@ -93,8 +99,17 @@ else:
         except:
             print("Вы ввели невозможный размер!")
     for i in range(sizeMass1):
+<<<<<<< HEAD
         userMass1.append(random.random())
 
+=======
+        while True:
+            try:
+                userMass1.append(int(input("Введите элемент массива: ")))
+                break
+            except:
+                print("Вы ввели не целое число")
+>>>>>>> 6717550b6ec7c29b22511e7745c6a4bf4d6b69bb
     while True:
         try:
             sizeMass2 = int(input("Введите размер массива: "))
@@ -104,10 +119,20 @@ else:
                 print("Размер должен быть больше нуля!")
         except:
             print("Вы ввели невозможный размер!")
+<<<<<<< HEAD
 
     for i in range(sizeMass2):
         userMass2.append(random.random())
 
+=======
+    for i in range(sizeMass2):
+        while True:
+            try:
+                userMass2.append(int(input("Введите элемент массива: ")))
+                break
+            except:
+                print("Вы ввели не целое число")
+>>>>>>> 6717550b6ec7c29b22511e7745c6a4bf4d6b69bb
     while True:
         try:
             sizeMass3 = int(input("Введите размер массива: "))
@@ -118,7 +143,16 @@ else:
         except:
             print("Вы ввели невозможный размер!")
     for i in range(sizeMass3):
+<<<<<<< HEAD
         userMass3.append(random.random())
+=======
+        while True:
+            try:
+                userMass3.append(int(input("Введите элемент массива: ")))
+                break
+            except:
+                print("Вы ввели не целое число")
+>>>>>>> 6717550b6ec7c29b22511e7745c6a4bf4d6b69bb
 
 #  Расчет времени
 time4 = hairbrush(userMass1)
@@ -135,4 +169,8 @@ time8 = hairbrush(userMass2)
 time9 = hairbrush(userMass3)
 
 #  Вывод таблицы
+<<<<<<< HEAD
 printTab(time1, time2, time3, time4, time5, time6, time7, time8, time9)
+=======
+printTab(time1, time2, time3, time4, time5, time6, time7, time8, time9)
+>>>>>>> 6717550b6ec7c29b22511e7745c6a4bf4d6b69bb

@@ -1,6 +1,7 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+<<<<<<< HEAD
     <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="ignoredErrors">
         <list>
@@ -8,14 +9,27 @@
         </list>
       </option>
     </inspection_tool>
+=======
+>>>>>>> 6717550b6ec7c29b22511e7745c6a4bf4d6b69bb
     <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="ignoredErrors">
         <list>
           <option value="N802" />
+<<<<<<< HEAD
           <option value="N806" />
           <option value="N803" />
         </list>
       </option>
     </inspection_tool>
+=======
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+      <option name="processCode" value="true" />
+      <option name="processLiterals" value="true" />
+      <option name="processComments" value="true" />
+    </inspection_tool>
+>>>>>>> 6717550b6ec7c29b22511e7745c6a4bf4d6b69bb
   </profile>
 </component>
