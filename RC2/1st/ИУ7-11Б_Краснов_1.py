@@ -13,7 +13,5 @@ for i in range(size):
         pass
     else:
         finishMass.append(mass[i])
-    # if flag == 0:
-    #     finishMass.append(mass[i])
 for i in range(len(finishMass)):
     print(finishMass[i], end=" ")
