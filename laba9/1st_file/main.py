@@ -16,11 +16,6 @@ for i in range(len(D)):
 for j in range(len(D)):
     for k in range(len(F)):
         a[j][k] = m.sin(D[j] + F[k])
-# print("Матрица выглядит так: ")
-# for i in range(len(a)):
-#     for j in range(len(a[i])):
-#         print(a[i][j], end=" ")
-#     print()
 average = 0
 AV = []
 L = []
@@ -35,7 +30,6 @@ for i in range(len(a)):
         average = 0
     else:
         average /= plusElem
-    # print("Среднеарифметическое", i, "строки = ", average)
     if average == 0:
         average = "No"
     AV.append(average)
@@ -52,8 +46,3 @@ for i in range(len(a)):
     for j in range(len(a[i])):
         print("{:<8.2}".format(a[i][j]), end=" ")
     print("     {:<8.2}".format(AV[i]), L[i])
-
-# for i in range(len(a)):
-#     for j in range(len(a[i])):
-#         print(a[i][j], end=" ")
-#     print("     ", AV[i], L[i])
